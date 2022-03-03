@@ -92,6 +92,7 @@ public class Calc2 extends HttpServlet {
 						
 			response.addCookie(valueCookie);
 			response.addCookie(opCookie);
+			response.sendRedirect("calc2.html"); // redirect 사용 경로 우회
 		}
 
 	}
