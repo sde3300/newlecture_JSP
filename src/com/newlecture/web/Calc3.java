@@ -34,13 +34,20 @@ public class Calc3 extends HttpServlet {
 					break;
 				}
 		
+		
 		if(operator != null && operator.equals("=")) {
 			ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 			try {
 				exp = String.valueOf(engine.eval(exp));
 			} catch (ScriptException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+          
+          // 쿠키 삭제 조건.
+		} else if(operator != null && operator.equals("C")) {
+			exp = "";
+            
 		} else {
 			// 쿠키로 저장하는 작업.
 			// exp에 누적 진행(아래 중 null이 아닌 값 1가지만 오게됨)
@@ -51,7 +58,10 @@ public class Calc3 extends HttpServlet {
 		
 		
 		Cookie expCookie = new Cookie("exp", exp);
-		
+        // 쿠키 삭제
+		if(operator != null && operator.equals("C")) {
+			expCookie.setMaxAge(0);		
+		}
 		response.addCookie(expCookie);		
 		response.sendRedirect("calcpage"); // redirect 사용 경로 우회
 	}
