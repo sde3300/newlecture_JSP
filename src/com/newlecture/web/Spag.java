@@ -1,6 +1,8 @@
 package com.newlecture.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +30,17 @@ public class Spag extends HttpServlet{
 			result = "홀수";
 		
 		request.setAttribute("result", result);
+		
+		// 배열 담아보기
+		String[] names = {"newlec", "dragon"};
+		request.setAttribute("names", names);
+		
+		// map<키, 값> 담아보기
+		Map<String, Object> notice = new HashMap<String, Object>();
+		notice.put("id", 1);
+		notice.put("title", "EL은 좋아요.");
+		
+		request.setAttribute("notice", notice);
 		
 		// redirect 새로 요청할 때
 		// forward 일을 이어갈 때
